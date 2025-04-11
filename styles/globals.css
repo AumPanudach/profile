@@ -1,0 +1,10 @@
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Import shadcn/ui styles */
+@import 'shadcn-ui/dist/styles.css';
