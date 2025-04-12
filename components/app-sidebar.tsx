@@ -1,20 +1,18 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
   Home,
   User,
-  Code,
   Briefcase,
   Mail,
   GraduationCap,
-  FileText,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
+import { ThemeToggle } from "@/components/theme-toggle"
 import {
   Sidebar,
   SidebarContent,
@@ -22,7 +20,6 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
-
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
@@ -54,22 +51,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         isActive: pathname === "/projects",
       },
       {
-        title: "Skills",
-        url: "/skills",
-        icon: Code,
-        isActive: pathname === "/skills",
-      },
-      {
         title: "Education",
         url: "/education",
         icon: GraduationCap,
         isActive: pathname === "/education",
-      },
-      {
-        title: "Resume",
-        url: "/resume",
-        icon: FileText,
-        isActive: pathname === "/resume",
       },
       {
         title: "Contact",
@@ -85,6 +70,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       collapsible="icon"
       {...props}
     >
+      <SidebarHeader className="flex items-center justify-between py-4 px-4">
+        <ThemeToggle />
+      </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>

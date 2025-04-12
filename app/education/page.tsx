@@ -1,16 +1,34 @@
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+"use client";
+
+import { PageHeader } from "@/components/page-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { GraduationCap, Building, Calendar, Award, BookOpen } from "lucide-react";
+import { GraduationCap, Building, Calendar, BookOpen, Award } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function EducationPage() {
+  // Animation variants
+  const pageVariants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1, transition: { duration: 0.6 } },
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.3,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  };
+
   // Education data
   const education = [
     {
@@ -34,95 +52,67 @@ export default function EducationPage() {
       achievements: ["First Class Honors", "Dean's List all semesters", "Programming Contest Winner"],
       courses: ["Data Structures", "Database Systems", "Object-Oriented Programming", "Web Development"],
       logo: "/bti-logo.png"
-    },
-    {
-      degree: "Professional Certification in Full-Stack Development",
-      institution: "Tech Academy Online",
-      location: "Online",
-      startYear: 2019,
-      endYear: 2019,
-      description: "Intensive 6-month program focused on modern web development technologies and practices.",
-      achievements: ["Top Student Award", "Capstone Project Excellence"],
-      courses: ["React.js", "Node.js", "MongoDB", "AWS Deployment"],
-      logo: "/tech-academy.png"
-    }
-  ];
-
-  // Certifications
-  const certifications = [
-    {
-      name: "AWS Certified Solutions Architect",
-      issuer: "Amazon Web Services",
-      date: "2022",
-      expires: "2025",
-      credentialId: "AWS-123456",
-      logo: "/aws-cert.png"
-    },
-    {
-      name: "Microsoft Certified: Azure Developer Associate",
-      issuer: "Microsoft",
-      date: "2021",
-      expires: "2024",
-      credentialId: "MSFT-789012",
-      logo: "/microsoft-cert.png"
-    },
-    {
-      name: "Google Professional Cloud Developer",
-      issuer: "Google",
-      date: "2023",
-      expires: "2026",
-      credentialId: "GCP-345678",
-      logo: "/google-cert.png"
-    },
-    {
-      name: "Certified Kubernetes Administrator (CKA)",
-      issuer: "Cloud Native Computing Foundation",
-      date: "2022",
-      expires: "2025",
-      credentialId: "CKA-901234",
-      logo: "/kubernetes-cert.png"
     }
   ];
 
   return (
     <>
-      <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
-        <div className="flex items-center gap-2 px-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator
-            orientation="vertical"
-            className="mr-2 data-[orientation=vertical]:h-4"
-          />
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/">Home</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/education">Education</BreadcrumbLink>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </div>
-      </header>
-      <div className="flex flex-1 flex-col gap-8 p-6 pt-0">
+      <PageHeader 
+        breadcrumbItems={[
+          { title: "Education", href: "/education", isCurrentPage: true }
+        ]}
+      />
+      <motion.div 
+        className="flex flex-1 flex-col gap-8 p-6 pt-0"
+        initial="initial"
+        animate="animate"
+        variants={pageVariants}
+      >
         <section className="flex flex-col gap-6">
-          <div className="flex flex-col gap-2">
+          <motion.div 
+            className="flex flex-col gap-2"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <h1 className="text-4xl font-bold">Education</h1>
             <p className="text-muted-foreground text-lg">My academic background and qualifications</p>
-          </div>
+          </motion.div>
           
           {/* Academic Education */}
           <div className="flex flex-col gap-8">
-            <h2 className="text-2xl font-semibold">Academic Background</h2>
-            <div className="flex flex-col gap-10 relative before:absolute before:h-full before:w-0.5 before:bg-border before:left-[17px] before:ml-px">
+            <motion.h2 
+              className="text-2xl font-semibold"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              Academic Background
+            </motion.h2>
+            <motion.div 
+              className="flex flex-col gap-10 relative before:absolute before:h-full before:w-0.5 before:bg-border before:left-[17px] before:ml-px"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
               {education.map((item, index) => (
-                <div key={index} className="flex gap-6">
-                  <div className="relative z-10">
+                <motion.div 
+                  key={index} 
+                  className="flex gap-6"
+                  variants={itemVariants}
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <motion.div 
+                    className="relative z-10"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.3 + index * 0.2 }}
+                  >
                     <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-primary-foreground">
                       <GraduationCap className="w-5 h-5" />
                     </div>
-                  </div>
+                  </motion.div>
                   <Card className="flex-1">
                     <CardContent className="p-6">
                       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-4">
@@ -160,50 +150,24 @@ export default function EducationPage() {
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {item.courses.map((course, idx) => (
-                            <Badge key={idx} variant="outline">{course}</Badge>
+                            <motion.div 
+                              key={idx}
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              <Badge variant="outline">{course}</Badge>
+                            </motion.div>
                           ))}
                         </div>
                       </div>
                     </CardContent>
                   </Card>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
-          
-          {/* Certifications */}
-          <div className="flex flex-col gap-6 mt-6">
-            <h2 className="text-2xl font-semibold">Certifications</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {certifications.map((cert, index) => (
-                <Card key={index} className="flex">
-                  <CardContent className="p-6 flex flex-1 gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 bg-secondary rounded-md flex items-center justify-center">
-                      <Award className="w-6 h-6 text-primary" />
-                    </div>
-                    <div className="flex flex-col flex-1">
-                      <h3 className="text-lg font-medium">{cert.name}</h3>
-                      <p className="text-muted-foreground">{cert.issuer}</p>
-                      <div className="mt-2 flex items-center gap-6">
-                        <div className="flex items-center gap-1 text-sm">
-                          <Calendar className="w-3.5 h-3.5 text-muted-foreground" />
-                          <span>Issued: {cert.date}</span>
-                        </div>
-                        <div className="flex items-center gap-1 text-sm">
-                          <Calendar className="w-3.5 h-3.5 text-muted-foreground" />
-                          <span>Expires: {cert.expires}</span>
-                        </div>
-                      </div>
-                      <p className="text-xs text-muted-foreground mt-2">Credential ID: {cert.credentialId}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-
         </section>
-      </div>
+      </motion.div>
     </>
   );
 }
