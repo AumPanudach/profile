@@ -89,7 +89,7 @@ export default function AboutPage() {
                 whileHover={{ scale: 1.03 }}
               >
                 <Image
-                  src="/profile-image.jpg"
+                  src="/images/profile.jpg"
                   alt="Profile picture"
                   fill
                   style={{ objectFit: "cover" }}

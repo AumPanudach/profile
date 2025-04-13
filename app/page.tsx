@@ -183,7 +183,7 @@ export default function Home() {
             transition={{ duration: 0.3 }}
           >
             <Image
-              src="/profile-image.jpg"
+              src="/images/profile.jpg"
               alt="Profile picture"
               fill
               style={{ objectFit: "cover" }}
