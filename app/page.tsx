@@ -3,10 +3,6 @@
 import Image from "next/image";
 import { PageHeader } from "@/components/page-header";
 import { 
-  Code2, 
-  Database, 
-  LayoutGrid, 
-  ServerCog,
   Users,
   MessageSquare,
   LightbulbIcon,
@@ -15,9 +11,6 @@ import {
   Building,
   Calendar,
   Globe,
-  Cloud,
-  Terminal,
-  Blocks
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { 
@@ -36,7 +29,8 @@ import {
   IconBrandDjango,
   IconBrandNodejs,
   IconCoffee,
-  IconBrandJavascript
+  IconBrandJavascript,
+  IconBrandGithub,
  } from "@tabler/icons-react"
 export default function Home() {
   // Skills organized by category
@@ -50,7 +44,7 @@ export default function Home() {
       { name: "Java", icon: <IconCoffee className="w-5 h-5" /> },
     ],
     frameworks: [
-      { name: "Next.js", icon: <IconBrandReact className="w-5 h-5" /> },
+      { name: "Next.js", icon: <IconBrandNextjs className="w-5 h-5" /> },
       { name: "Node.js", icon: <IconBrandNodejs className="w-5 h-5" /> },
       { name: "Gin", icon: <IconBrandGolang className="w-5 h-5" /> },
       { name: "Laravel 8", icon: <IconBrandLaravel className="w-5 h-5" /> },
@@ -113,6 +107,43 @@ export default function Home() {
     }
   ];
 
+  // Project data
+  const featuredProjects = [
+    {
+      id: 1,
+      title: "E-commerce Platform",
+      description: "A modern shopping experience built with Next.js and Stripe integration.",
+      image: "/project1.jpg",
+      date: "June 2023",
+      techStack: ["Next.js", "Express.js", "MongoDB", "RestAPI"],
+      screenshots: ['/ecommerce-screenshot1.jpg', '/ecommerce-screenshot2.jpg', '/ecommerce-screenshot3.jpg'],
+      demoLink: "#",
+      githubLink: "#"
+    },
+    {
+      id: 2,
+      title: "AI Dashboard",
+      description: "Data visualization dashboard for AI metrics with real-time updates.",
+      image: "/project2.jpg",
+      date: "March 2023",
+      techStack: ["React.js", "Gin", "MySQL", "RestAPI"],
+      screenshots: ['/dashboard-screenshot1.jpg', '/dashboard-screenshot2.jpg', '/dashboard-screenshot3.jpg'],
+      demoLink: "#",
+      githubLink: "#"
+    },
+    {
+      id: 3,
+      title: "Social Media App",
+      description: "Feature-rich social platform with real-time messaging and content sharing.",
+      image: "/project3.jpg",
+      date: "November 2022",
+      techStack: ["React Native", "GraphQL", "PostgreSQL"],
+      screenshots: ['/social-screenshot1.jpg', '/social-screenshot2.jpg', '/social-screenshot3.jpg'],
+      demoLink: "#",
+      githubLink: "#"
+    }
+  ];
+
   // Animation variants
   const fadeIn = {
     hidden: { opacity: 0 },
@@ -167,7 +198,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              John Doe
+              Panudach Kongsomboon
             </motion.h1>
             <motion.h2 
               className="text-2xl text-primary"
@@ -264,75 +295,114 @@ export default function Home() {
 
         {/* Featured Projects Section */}
         <motion.section 
-          className="flex flex-col gap-4"
+          className="flex flex-col gap-6"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <h2 className="text-3xl font-semibold">Featured Projects</h2>
           <motion.div 
-            className="grid auto-rows-min gap-6 md:grid-cols-3"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
             variants={staggerChildren}
             initial="hidden"
             animate="visible"
           >
-            <motion.div 
-              className="flex flex-col bg-card rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-colors"
-              variants={itemVariants}
-              whileHover={{ y: -5, transition: { duration: 0.2 } }}
-            >
-              <div className="aspect-video relative">
-                <Image 
-                  src="/project1.jpg" 
-                  alt="Project 1" 
-                  fill 
-                  style={{ objectFit: "cover" }} 
-                  className="bg-muted" 
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="text-xl font-medium">E-commerce Platform</h3>
-                <p className="text-muted-foreground mt-2">A modern shopping experience built with Next.js and Stripe integration.</p>
-              </div>
-            </motion.div>
-            <motion.div 
-              className="flex flex-col bg-card rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-colors"
-              variants={itemVariants}
-              whileHover={{ y: -5, transition: { duration: 0.2 } }}
-            >
-              <div className="aspect-video relative">
-                <Image 
-                  src="/project2.jpg" 
-                  alt="Project 2" 
-                  fill 
-                  style={{ objectFit: "cover" }} 
-                  className="bg-muted" 
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="text-xl font-medium">AI Dashboard</h3>
-                <p className="text-muted-foreground mt-2">Data visualization dashboard for AI metrics with real-time updates.</p>
-              </div>
-            </motion.div>
-            <motion.div 
-              className="flex flex-col bg-card rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-colors"
-              variants={itemVariants}
-              whileHover={{ y: -5, transition: { duration: 0.2 } }}
-            >
-              <div className="aspect-video relative">
-                <Image 
-                  src="/project3.jpg" 
-                  alt="Project 3" 
-                  fill 
-                  style={{ objectFit: "cover" }} 
-                  className="bg-muted" 
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="text-xl font-medium">Social Media App</h3>
-                <p className="text-muted-foreground mt-2">Feature-rich social platform with real-time messaging and content sharing.</p>
-              </div>
-            </motion.div>
+            {featuredProjects.map((project) => (
+              <motion.div 
+                key={project.id}
+                className="h-full"
+                variants={itemVariants}
+                whileHover={{ 
+                  y: -10,
+                  transition: { duration: 0.2 }
+                }}
+              >
+                <div className="flex flex-col bg-card rounded-xl overflow-hidden border border-border h-full">
+                  <div className="relative h-52 overflow-hidden group">
+                    <motion.div
+                      whileHover={{ 
+                        scale: 1.05,
+                        transition: { duration: 0.3 }
+                      }}
+                      className="w-full h-full"
+                    >
+                      <Image 
+                        src={project.image} 
+                        alt={project.title} 
+                        fill 
+                        style={{ objectFit: "cover" }}
+                        className="transition-transform"
+                      />
+                    </motion.div>
+                    
+                    {/* Image overlay with screenshots */}
+                    <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+                      <div className="flex gap-2 overflow-hidden">
+                        {project.screenshots.slice(0, 3).map((screenshot, idx) => (
+                          <motion.div 
+                            key={idx} 
+                            className="relative w-20 h-20 rounded-md overflow-hidden"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: idx * 0.1 }}
+                            whileHover={{ scale: 1.1 }}
+                          >
+                            <Image
+                              src={screenshot}
+                              alt={`${project.title} screenshot ${idx + 1}`}
+                              fill
+                              style={{ objectFit: "cover" }}
+                            />
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-5 flex flex-col flex-grow">
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <h3 className="text-xl font-semibold">{project.title}</h3>
+                      <div className="flex items-center gap-1 text-xs text-muted-foreground shrink-0">
+                        <Calendar className="w-3 h-3" />
+                        <span>{project.date}</span>
+                      </div>
+                    </div>
+                    
+                    <p className="text-muted-foreground mb-4 text-sm flex-grow">{project.description}</p>
+                    
+                    <motion.div 
+                      className="flex flex-wrap gap-1.5 mb-4"
+                      initial="hidden"
+                      animate="visible"
+                    >
+                      {project.techStack.map((tech, idx) => (
+                        <motion.span 
+                          key={idx}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <span className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-medium bg-primary text-primary-foreground">{tech}</span>
+                        </motion.span>
+                      ))}
+                    </motion.div>
+                    
+                    <div className="flex gap-2 mt-auto">
+                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                        <a href={project.demoLink} className="px-3 py-1.5 text-xs bg-primary text-primary-foreground rounded-md flex items-center gap-1.5">
+                          <Globe className="w-3.5 h-3.5" />
+                          Demo
+                        </a>
+                      </motion.div>
+                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                        <a href={project.githubLink} className="px-3 py-1.5 text-xs border border-input rounded-md flex items-center gap-1.5">
+                          <IconBrandGithub className="w-3.5 h-3.5" />
+                          GitHub
+                        </a>
+                      </motion.div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </motion.section>
 
@@ -482,63 +552,3 @@ export default function Home() {
   );
 }
 
-// Skill data organized by category
-export const skillsByCategory = {
-  frontend: [
-    { name: 'HTML', icon: '🌐' },
-    { name: 'CSS', icon: '🎨' },
-    { name: 'JavaScript', icon: 'JS' },
-    { name: 'TypeScript', icon: 'TS' },
-    { name: 'React', icon: '⚛️' },
-    { name: 'Next.js', icon: 'N' },
-    { name: 'Tailwind CSS', icon: '🌊' },
-  ],
-  backend: [
-    { name: 'Node.js', icon: '📦' },
-    { name: 'Express', icon: '🚂' },
-    { name: 'MongoDB', icon: '🍃' },
-    { name: 'PostgreSQL', icon: '🐘' },
-    { name: 'GraphQL', icon: '⚙️' },
-  ],
-  tools: [
-    { name: 'Git', icon: '🔄' },
-    { name: 'Docker', icon: '🐳' },
-    { name: 'AWS', icon: '☁️' },
-    { name: 'Firebase', icon: '🔥' },
-  ],
-  other: [
-    { name: 'Testing', icon: '🧪' },
-    { name: 'CI/CD', icon: '🔄' },
-    { name: 'Agile', icon: '🏃' },
-  ]
-};
-
-function Skills() {
-  return (
-    <section className="py-10 md:py-16">
-      <div className="container">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold mb-4">Skills</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-          {Object.entries(skillsByCategory).map(([category, skills]) => (
-            <div key={category} className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-bold mb-4 capitalize">{category}</h3>
-              <div className="flex flex-wrap gap-2">
-                {skills.map((skill, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-1 bg-gray-100 px-2 py-1 rounded-md text-sm"
-                  >
-                    {skill.icon}
-                    <span>{skill.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}

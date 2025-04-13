@@ -45,12 +45,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         isActive: pathname === "/about",
       },
       {
-        title: "Projects",
-        url: "/projects",
-        icon: Briefcase,
-        isActive: pathname === "/projects",
-      },
-      {
         title: "Education",
         url: "/education",
         icon: GraduationCap,
