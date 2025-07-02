@@ -112,24 +112,37 @@ export default function AboutPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <h2 className="text-2xl font-semibold">Biography</h2>
+                <h2 className="text-2xl font-semibold text-primary border-b border-primary/20 pb-2">
+                  🎯 Target
+                </h2>
                 <motion.div 
-                  className="space-y-4"
+                  className="space-y-4 bg-gradient-to-r from-primary/5 to-transparent p-4 rounded-lg border-l-4 border-primary"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.7, delay: 0.5 }}
                 >
-                  <p>
-                    Hello! I am John Doe, a passionate and creative full-stack developer with over 5 years of experience in building web and mobile applications. I specialize in React, Next.js, and TypeScript, focusing on creating intuitive user interfaces and robust backend systems.
+                  <p className="text-base leading-relaxed">
+                    My goal is to pursue a career as a <span className="font-semibold text-primary">Backend Developer</span> because I believe it is a crucial role in designing the system's backend. I am interested in working as part of a team and have a meticulous nature. I am also eager to learn new things. I hope you will give me the opportunity to contribute to improving the organization's system.
                   </p>
-                  <p>
-                    After graduating with a degree in Computer Science from Thai University in 2018, I joined TechCorp where I helped develop enterprise applications for clients across Asia. In 2020, I transitioned to a senior role at InnovateTH, leading a team of 5 developers on high-impact projects for fintech startups.
+                </motion.div>
+                
+                <h2 className="text-2xl font-semibold text-primary border-b border-primary/20 pb-2 mt-6">
+                  📖 Biography
+                </h2>
+                <motion.div 
+                  className="space-y-4 bg-card p-4 rounded-lg border border-border"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.7, delay: 0.6 }}
+                >
+                  <p className="text-base leading-relaxed">
+                    I am a passionate <span className="font-semibold text-primary">Computer Engineering student</span> at King Mongkut's University of Technology North Bangkok with a strong focus on backend development. My journey in technology began with curiosity about how systems work behind the scenes.
                   </p>
-                  <p>
-                    My approach to development combines technical expertise with strong problem-solving abilities. I believe in writing clean, maintainable code and staying current with emerging technologies. When I am not coding, you can find me exploring new hiking trails, experimenting with photography, or contributing to open source projects.
+                  <p className="text-base leading-relaxed">
+                    Through my cooperative education at <span className="font-semibold">Biotec</span>, I gained hands-on experience in developing robust backend solutions using <span className="font-medium">Django, MongoDB, and Docker</span>. I thrive in collaborative environments and believe that great software is built by great teams.
                   </p>
-                  <p>
-                    I am always open to new challenges and opportunities to create impactful digital experiences. Feel free to reach out if you&rsquod like to collaborate or just have a chat about technology!
+                  <p className="text-base leading-relaxed">
+                    I'm particularly drawn to the challenge of creating <span className="font-medium">scalable, efficient systems</span> that can handle complex business logic while maintaining clean, maintainable code. My meticulous nature helps me write reliable software that stands the test of time.
                   </p>
                 </motion.div>
               </motion.div>
@@ -140,7 +153,7 @@ export default function AboutPage() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
-                <h2 className="text-2xl font-semibold">What I Do</h2>
+                <h2 className="text-2xl font-semibold text-primary border-b border-primary/20 pb-2">💻 What I Do</h2>
                 <motion.div 
                   className="grid grid-cols-1 md:grid-cols-2 gap-4"
                   variants={staggerCards}
@@ -148,10 +161,49 @@ export default function AboutPage() {
                   animate="visible"
                 >
                   <motion.div variants={cardVariants} whileHover={{ y: -5, transition: { duration: 0.2 } }}>
-                    <Card>
-                      <CardContent className="p-4">
-                        <h3 className="text-lg font-medium">Backend Development</h3>
-                        <p className="text-muted-foreground mt-2">Building scalable APIs and services using Node.js, Express, and various database technologies.</p>
+                    <Card className="h-full border-l-4 border-l-primary hover:shadow-lg transition-shadow">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-3">
+                          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                            <span className="text-primary text-lg">🚀</span>
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-semibold mb-2">Backend Development</h3>
+                            <p className="text-muted-foreground leading-relaxed">Building scalable APIs and services using <span className="font-medium">Node.js, Express, Django, and Gin</span> with focus on performance and maintainability.</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+
+                  <motion.div variants={cardVariants} whileHover={{ y: -5, transition: { duration: 0.2 } }}>
+                    <Card className="h-full border-l-4 border-l-blue-500 hover:shadow-lg transition-shadow">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-3">
+                          <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0">
+                            <span className="text-blue-500 text-lg">🗄️</span>
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-semibold mb-2">Database Design</h3>
+                            <p className="text-muted-foreground leading-relaxed">Designing efficient database schemas and optimizing queries for <span className="font-medium">MongoDB, MySQL, and SQL Server</span>.</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+
+                  <motion.div variants={cardVariants} whileHover={{ y: -5, transition: { duration: 0.2 } }}>
+                    <Card className="h-full border-l-4 border-l-green-500 hover:shadow-lg transition-shadow">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-3">
+                          <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center shrink-0">
+                            <span className="text-green-500 text-lg">🔗</span>
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-semibold mb-2">API Development</h3>
+                            <p className="text-muted-foreground leading-relaxed">Creating robust <span className="font-medium">RESTful APIs</span> with proper authentication, validation, and documentation.</p>
+                          </div>
+                        </div>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -164,23 +216,37 @@ export default function AboutPage() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.8 }}
               >
-                <h2 className="text-2xl font-semibold">Interests</h2>
+                <h2 className="text-2xl font-semibold text-primary border-b border-primary/20 pb-2">🎯 Interests & Hobbies</h2>
                 <motion.div 
-                  className="flex flex-wrap gap-2"
-                  variants={badgeContainer}
-                  initial="hidden"
-                  animate="visible"
+                  className="bg-card p-4 rounded-lg border border-border"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.9 }}
                 >
-                  {["Reading Cartoon", "Weight training", "Coding", "Music"].map((interest) => (
-                    <motion.div 
-                      key={interest} 
-                      variants={badgeVariants}
-                      whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Badge variant="outline" className="px-3 py-1 text-sm">{interest}</Badge>
-                    </motion.div>
-                  ))}
+                  <p className="text-muted-foreground mb-3">When I'm not coding, you can find me:</p>
+                  <motion.div 
+                    className="flex flex-wrap gap-2"
+                    variants={badgeContainer}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    {[
+                      { name: "📚 Reading Cartoon", color: "bg-blue-500/10 text-blue-600 border-blue-200" },
+                      { name: "💪 Weight Training", color: "bg-red-500/10 text-red-600 border-red-200" },
+                      { name: "🎵 Music", color: "bg-purple-500/10 text-purple-600 border-purple-200" }
+                    ].map((interest) => (
+                      <motion.div 
+                        key={interest.name} 
+                        variants={badgeVariants}
+                        whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <span className={`px-3 py-2 rounded-full text-sm font-medium border ${interest.color} transition-all hover:shadow-md`}>
+                          {interest.name}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </motion.div>
                 </motion.div>
               </motion.div>
             </motion.div>

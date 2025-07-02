@@ -110,23 +110,13 @@ export default function Home() {
     {
       id: 1,
       title: "E-commerce Platform",
-      description: "A modern shopping experience built with Next.js and Stripe integration.",
-      image: "/project1.jpg",
+      description: "A modern shopping experience built with Laravel.",
+      image: "/images/project1.png",
       date: "June 2023",
-      techStack: ["Next.js", "Express.js", "MongoDB", "RestAPI"],
-      screenshots: ['/ecommerce-screenshot1.jpg', '/ecommerce-screenshot2.jpg', '/ecommerce-screenshot3.jpg'],
-      githubLink: "#"
-    },
-    {
-      id: 2,
-      title: "AI Dashboard",
-      description: "Data visualization dashboard for AI metrics with real-time updates.",
-      image: "/project2.jpg",
-      date: "March 2023",
-      techStack: ["React.js", "Gin", "MySQL", "RestAPI"],
-      screenshots: ['/dashboard-screenshot1.jpg', '/dashboard-screenshot2.jpg', '/dashboard-screenshot3.jpg'],
-      githubLink: "#"
-    },
+      techStack: ["Laravel", "MySQL", "RestAPI"],
+      screenshots: ['/images/ecommerce-screenshot1.png', '/images/ecommerce-screenshot2.png', '/images/ecommerce-screenshot3.png'],
+      githubLink: "https://github.com/AumPanudach/finalproject_bikeshop"
+    }
   ];
 
   // Animation variants
@@ -200,8 +190,8 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.4 }}
             >
               Welcome to my personal portfolio! I am Panudach Kongsomboon passionate developer with expertise in 
-              Express.js, Gin and Django. With over 1 years of experience building 
-              web applications, I focus on creating efficient back-end solutions that deliver exceptional user experiences.
+              Express.js, Gin and Django. With 1 years of experience building 
+              web applications, I focus on creating efficient back-end solutions that drive business success.
             </motion.p>
             <motion.div 
               className="flex gap-4 mt-2 justify-center md:justify-start"

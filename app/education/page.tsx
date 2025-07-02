@@ -33,13 +33,13 @@ export default function EducationPage() {
   const education = [
     {
       degree: "Bachelor of Information Technology",
-      institution: "Bangkok Technical Institute",
-      location: "Bangkok, Thailand",
+      institution: "King Mongkut's University of Technology North Bangkok (KMUTNB)",
+      location: "Prachin Buri, Thailand",
       startYear: 2021,
       endYear: 2024,
       description: "Core focus on software development methodologies, programming paradigms, and system design principles.",
       achievements: ["First Class Honors"],
-      courses: ["Data Structures", "Database Systems", "Object-Oriented Programming", "Web Development"],
+      courses: ["Data Structures", "Database Systems", "Object-Oriented Programming", "Web Development", "Advanced Web Programming", "Advanced Database Systems"],
       logo: "/images/kmutnb_logo.png"
     }
   ];
