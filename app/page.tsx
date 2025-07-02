@@ -190,8 +190,8 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.4 }}
             >
               Welcome to my personal portfolio! I am Panudach Kongsomboon passionate developer with expertise in 
-              Express.js, Gin and Django. With over 1 years of experience building 
-              web applications, I focus on creating efficient back-end solutions that deliver exceptional user experiences.
+              Express.js, Gin and Django. With 1 years of experience building 
+              web applications, I focus on creating efficient back-end solutions that drive business success.
             </motion.p>
             <motion.div 
               className="flex gap-4 mt-2 justify-center md:justify-start"

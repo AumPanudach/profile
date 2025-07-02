@@ -26,9 +26,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   // Data for personal portfolio with active state based on current path
   const data = {
     user: {
-      name: "John Doe",
-      email: "john@example.com",
-      avatar: "/profile-image.jpg",
+      name: "Panudach Kongsomboon",
+      email: "panudach.work@gmail.com",
+      avatar: "/images/avatar.png",
     },
     navMain: [
       {
