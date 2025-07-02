@@ -6,10 +6,101 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { MapPin, Mail, Phone, Github, Facebook, Send } from "lucide-react";
+import { MapPin, Mail, Phone, Github, Facebook, Send, CheckCircle, Shield } from "lucide-react";
 import { motion, Variants } from "framer-motion";
+import { useState, useRef } from "react";
+import emailjs from '@emailjs/browser';
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function ContactPage() {
+  // State for form handling
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  // Handle form input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Check if reCAPTCHA is completed
+    if (!recaptchaToken) {
+      setSubmitStatus('error');
+      return;
+    }
+    
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      // First verify reCAPTCHA on server-side
+      const recaptchaResponse = await fetch('/api/verify-recaptcha', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token: recaptchaToken }),
+      });
+
+      const recaptchaResult = await recaptchaResponse.json();
+    
+      if (!recaptchaResult.success) {
+        throw new Error('reCAPTCHA verification failed');
+      }
+
+      // EmailJS configuration from environment variables
+      const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+      const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
+
+      if (!serviceID || !templateID || !publicKey) {
+        throw new Error('EmailJS configuration is missing');
+      }
+
+      await emailjs.send(
+        serviceID,
+        templateID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          reply_to: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_name: "Panudach",
+          to_email: contactEmail,
+          'g-recaptcha-response': recaptchaToken
+        },
+        publicKey
+      );
+
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' }); // Reset form
+      setRecaptchaToken(null);
+      recaptchaRef.current?.reset(); // Reset reCAPTCHA
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   // Animation variants
   const pageTransition = {
     hidden: { opacity: 0 },
@@ -86,25 +177,68 @@ export default function ContactPage() {
               <Card>
                 <CardContent className="p-6">
                   <h2 className="text-2xl font-semibold mb-6">Send Me a Message</h2>
-                  <form className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    {submitStatus === 'success' && (
+                      <motion.div 
+                        className="p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2 text-green-700"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                      >
+                        <CheckCircle className="h-4 w-4" />
+                        ส่งข้อความเรียบร้อยแล้ว! ขอบคุณที่ติดต่อมา
+                      </motion.div>
+                    )}
+                    
+                    {submitStatus === 'error' && (
+                      <motion.div 
+                        className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                      >
+                        เกิดข้อผิดพลาดในการส่งข้อความ กรุณาลองใหม่อีกครั้ง
+                      </motion.div>
+                    )}
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <motion.div variants={formElementVariants}>
                         <div className="space-y-2">
                           <Label htmlFor="name">Name</Label>
-                          <Input id="name" placeholder="Your name" />
+                          <Input 
+                            id="name" 
+                            name="name"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            placeholder="Your name" 
+                            required
+                          />
                         </div>
                       </motion.div>
                       <motion.div variants={formElementVariants}>
                         <div className="space-y-2">
                           <Label htmlFor="email">Email</Label>
-                          <Input id="email" type="email" placeholder="your.email@example.com" />
+                          <Input 
+                            id="email" 
+                            name="email"
+                            type="email" 
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            placeholder="your.email@example.com" 
+                            required
+                          />
                         </div>
                       </motion.div>
                     </div>
                     <motion.div variants={formElementVariants}>
                       <div className="space-y-2">
                         <Label htmlFor="subject">Subject</Label>
-                        <Input id="subject" placeholder="What is this regarding?" />
+                        <Input 
+                          id="subject" 
+                          name="subject"
+                          value={formData.subject}
+                          onChange={handleInputChange}
+                          placeholder="What is this regarding?" 
+                          required
+                        />
                       </div>
                     </motion.div>
                     <motion.div variants={formElementVariants}>
@@ -112,15 +246,46 @@ export default function ContactPage() {
                         <Label htmlFor="message">Message</Label>
                         <Textarea 
                           id="message" 
+                          name="message"
+                          value={formData.message}
+                          onChange={handleInputChange}
                           placeholder="Tell me about your project, question, or job opportunity..." 
                           rows={6} 
+                          required
                         />
                       </div>
                     </motion.div>
+                    
+                    {/* reCAPTCHA */}
                     <motion.div variants={formElementVariants}>
-                      <Button type="submit" className="w-full md:w-auto flex gap-2">
+                      <div className="space-y-2">
+                        <Label className="flex items-center gap-2">
+                          <Shield className="h-4 w-4 text-primary" />
+                          Security Verification
+                        </Label>
+                        <ReCAPTCHA
+                          ref={recaptchaRef}
+                          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
+                          onChange={(token) => setRecaptchaToken(token)}
+                          onExpired={() => setRecaptchaToken(null)}
+                          theme="light"
+                        />
+                        {submitStatus === 'error' && !recaptchaToken && (
+                          <p className="text-sm text-red-600">
+                            กรุณายืนยันว่าคุณไม่ใช่หุ่นยนต์
+                          </p>
+                        )}
+                      </div>
+                    </motion.div>
+
+                    <motion.div variants={formElementVariants}>
+                      <Button 
+                        type="submit" 
+                        className="w-full md:w-auto flex gap-2"
+                        disabled={isSubmitting || !recaptchaToken}
+                      >
                         <Send className="h-4 w-4" />
-                        Send Message
+                        {isSubmitting ? 'กำลังส่ง...' : 'Send Message'}
                       </Button>
                     </motion.div>
                   </form>

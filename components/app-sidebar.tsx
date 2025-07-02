@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation"
 import {
   Home,
   User,
-  Briefcase,
   Mail,
   GraduationCap,
 } from "lucide-react"

@@ -10,7 +10,6 @@ import {
   BarChart3,
   Building,
   Calendar,
-  Globe,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { 
@@ -20,18 +19,18 @@ import {
   IconBrandPython,
   IconSql,
   IconApi,
-  IconBrandAws,
   IconBrandDocker,
-  IconBrandNextjs,
   IconBrandLaravel,
   IconBrandMysql,
-  IconBrandReact,
   IconBrandDjango,
   IconBrandNodejs,
   IconCoffee,
   IconBrandJavascript,
   IconBrandGithub,
  } from "@tabler/icons-react"
+
+ import Link from "next/link";
+
 export default function Home() {
   // Skills organized by category
   const skillsByCategory = {
@@ -44,10 +43,9 @@ export default function Home() {
       { name: "Java", icon: <IconCoffee className="w-5 h-5" /> },
     ],
     frameworks: [
-      { name: "Next.js", icon: <IconBrandNextjs className="w-5 h-5" /> },
       { name: "Node.js", icon: <IconBrandNodejs className="w-5 h-5" /> },
       { name: "Gin", icon: <IconBrandGolang className="w-5 h-5" /> },
-      { name: "Laravel 8", icon: <IconBrandLaravel className="w-5 h-5" /> },
+      { name: "Laravel", icon: <IconBrandLaravel className="w-5 h-5" /> },
       { name: "Django", icon: <IconBrandDjango className="w-5 h-5" /> },
     ],
     databases: [
@@ -117,7 +115,6 @@ export default function Home() {
       date: "June 2023",
       techStack: ["Next.js", "Express.js", "MongoDB", "RestAPI"],
       screenshots: ['/ecommerce-screenshot1.jpg', '/ecommerce-screenshot2.jpg', '/ecommerce-screenshot3.jpg'],
-      demoLink: "#",
       githubLink: "#"
     },
     {
@@ -128,20 +125,8 @@ export default function Home() {
       date: "March 2023",
       techStack: ["React.js", "Gin", "MySQL", "RestAPI"],
       screenshots: ['/dashboard-screenshot1.jpg', '/dashboard-screenshot2.jpg', '/dashboard-screenshot3.jpg'],
-      demoLink: "#",
       githubLink: "#"
     },
-    {
-      id: 3,
-      title: "Social Media App",
-      description: "Feature-rich social platform with real-time messaging and content sharing.",
-      image: "/project3.jpg",
-      date: "November 2022",
-      techStack: ["React Native", "GraphQL", "PostgreSQL"],
-      screenshots: ['/social-screenshot1.jpg', '/social-screenshot2.jpg', '/social-screenshot3.jpg'],
-      demoLink: "#",
-      githubLink: "#"
-    }
   ];
 
   // Animation variants
@@ -206,7 +191,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              Full Stack Developer
+              Backend Developer
             </motion.h2>
             <motion.p 
               className="text-lg max-w-2xl"
@@ -215,9 +200,8 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.4 }}
             >
               Welcome to my personal portfolio! I am Panudach Kongsomboon passionate developer with expertise in 
-              React, Next.js, and TypeScript. With over 5 years of experience building 
-              web applications, I focus on creating beautiful, responsive, and user-friendly 
-              interfaces that deliver exceptional user experiences.
+              Express.js, Gin and Django. With over 1 years of experience building 
+              web applications, I focus on creating efficient back-end solutions that deliver exceptional user experiences.
             </motion.p>
             <motion.div 
               className="flex gap-4 mt-2 justify-center md:justify-start"
@@ -225,20 +209,41 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              <motion.button 
-                className="px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Contact Me
-              </motion.button>
-              <motion.button 
-                className="px-6 py-2 border border-input rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                View Resume
-              </motion.button>
+              <Link href='/contact'>
+                <motion.button 
+                  className="px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Contact Me
+                </motion.button>
+              </Link>
+              
+              <div className="flex gap-2">
+                <motion.button 
+                  className="px-6 py-2 border border-input rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => window.open('/resume/panudach-resume.pdf', '_blank')}
+                >
+                  View Resume
+                </motion.button>
+                
+                <motion.button 
+                  className="px-4 py-2 border border-input rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    const link = document.createElement('a');
+                    link.href = '/resume/panudach-resume.pdf';
+                    link.download = 'Panudach-Kongsomboon-Resume.pdf';
+                    link.click();
+                  }}
+                  title="Download Resume"
+                >
+                  📥
+                </motion.button>
+              </div>
             </motion.div>
           </div>
         </motion.section>
@@ -293,6 +298,7 @@ export default function Home() {
           </motion.div>
         </motion.section>
 
+      
         {/* Featured Projects Section */}
         <motion.section 
           className="flex flex-col gap-6"
@@ -386,12 +392,6 @@ export default function Home() {
                     </motion.div>
                     
                     <div className="flex gap-2 mt-auto">
-                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <a href={project.demoLink} className="px-3 py-1.5 text-xs bg-primary text-primary-foreground rounded-md flex items-center gap-1.5">
-                          <Globe className="w-3.5 h-3.5" />
-                          Demo
-                        </a>
-                      </motion.div>
                       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                         <a href={project.githubLink} className="px-3 py-1.5 text-xs border border-input rounded-md flex items-center gap-1.5">
                           <IconBrandGithub className="w-3.5 h-3.5" />

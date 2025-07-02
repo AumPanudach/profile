@@ -155,14 +155,6 @@ export default function AboutPage() {
                       </CardContent>
                     </Card>
                   </motion.div>
-                  <motion.div variants={cardVariants} whileHover={{ y: -5, transition: { duration: 0.2 } }}>
-                    <Card>
-                      <CardContent className="p-4">
-                        <h3 className="text-lg font-medium">Mobile Development</h3>
-                        <p className="text-muted-foreground mt-2">Creating cross-platform mobile applications using React Native and related technologies.</p>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
                 </motion.div>
               </motion.div>
               
