@@ -32,26 +32,15 @@ export default function EducationPage() {
   // Education data
   const education = [
     {
-      degree: "Master of Science in Computer Science",
-      institution: "Thai University",
-      location: "Bangkok, Thailand",
-      startYear: 2016,
-      endYear: 2018,
-      description: "Specialized in Artificial Intelligence and Machine Learning. Thesis on 'Neural Network Approaches to Natural Language Processing in Thai Language'.",
-      achievements: ["Graduated with Honors", "Research Scholarship Recipient", "Best Thesis Award"],
-      courses: ["Advanced Algorithm Design", "Machine Learning", "Computer Vision", "Natural Language Processing"],
-      logo: "/thai-university.png"
-    },
-    {
-      degree: "Bachelor of Engineering in Software Engineering",
+      degree: "Bachelor of Information Technology",
       institution: "Bangkok Technical Institute",
       location: "Bangkok, Thailand",
-      startYear: 2012,
-      endYear: 2016,
+      startYear: 2021,
+      endYear: 2024,
       description: "Core focus on software development methodologies, programming paradigms, and system design principles.",
-      achievements: ["First Class Honors", "Dean's List all semesters", "Programming Contest Winner"],
+      achievements: ["First Class Honors"],
       courses: ["Data Structures", "Database Systems", "Object-Oriented Programming", "Web Development"],
-      logo: "/bti-logo.png"
+      logo: "/images/kmutnb_logo.png"
     }
   ];
 

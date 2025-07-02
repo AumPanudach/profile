@@ -89,7 +89,7 @@ export default function AboutPage() {
                 whileHover={{ scale: 1.03 }}
               >
                 <Image
-                  src="/profile-image.jpg"
+                  src="/images/profile.jpg"
                   alt="Profile picture"
                   fill
                   style={{ objectFit: "cover" }}
@@ -152,14 +152,6 @@ export default function AboutPage() {
                       <CardContent className="p-4">
                         <h3 className="text-lg font-medium">Backend Development</h3>
                         <p className="text-muted-foreground mt-2">Building scalable APIs and services using Node.js, Express, and various database technologies.</p>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                  <motion.div variants={cardVariants} whileHover={{ y: -5, transition: { duration: 0.2 } }}>
-                    <Card>
-                      <CardContent className="p-4">
-                        <h3 className="text-lg font-medium">Mobile Development</h3>
-                        <p className="text-muted-foreground mt-2">Creating cross-platform mobile applications using React Native and related technologies.</p>
                       </CardContent>
                     </Card>
                   </motion.div>
