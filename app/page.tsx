@@ -111,22 +111,12 @@ export default function Home() {
       id: 1,
       title: "E-commerce Platform",
       description: "A modern shopping experience built with Next.js and Stripe integration.",
-      image: "/project1.jpg",
+      image: "/images/project1.png",
       date: "June 2023",
-      techStack: ["Next.js", "Express.js", "MongoDB", "RestAPI"],
-      screenshots: ['/ecommerce-screenshot1.jpg', '/ecommerce-screenshot2.jpg', '/ecommerce-screenshot3.jpg'],
-      githubLink: "#"
-    },
-    {
-      id: 2,
-      title: "AI Dashboard",
-      description: "Data visualization dashboard for AI metrics with real-time updates.",
-      image: "/project2.jpg",
-      date: "March 2023",
-      techStack: ["React.js", "Gin", "MySQL", "RestAPI"],
-      screenshots: ['/dashboard-screenshot1.jpg', '/dashboard-screenshot2.jpg', '/dashboard-screenshot3.jpg'],
-      githubLink: "#"
-    },
+      techStack: ["Laravel", "MySQL", "RestAPI"],
+      screenshots: ['/images/ecommerce-screenshot1.png', '/images/ecommerce-screenshot2.png', '/images/ecommerce-screenshot3.png'],
+      githubLink: "https://github.com/AumPanudach/finalproject_bikeshop"
+    }
   ];
 
   // Animation variants
