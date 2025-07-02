@@ -110,7 +110,7 @@ export default function Home() {
     {
       id: 1,
       title: "E-commerce Platform",
-      description: "A modern shopping experience built with Next.js and Stripe integration.",
+      description: "A modern shopping experience built with Laravel.",
       image: "/images/project1.png",
       date: "June 2023",
       techStack: ["Laravel", "MySQL", "RestAPI"],
