@@ -185,7 +185,7 @@ export default function ContactPage() {
                         animate={{ opacity: 1, y: 0 }}
                       >
                         <CheckCircle className="h-4 w-4" />
-                        ส่งข้อความเรียบร้อยแล้ว! ขอบคุณที่ติดต่อมา
+                        Message sent successfully.
                       </motion.div>
                     )}
                     
@@ -195,7 +195,7 @@ export default function ContactPage() {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                       >
-                        เกิดข้อผิดพลาดในการส่งข้อความ กรุณาลองใหม่อีกครั้ง
+                        An error occurred while sending the message. Please try again.
                       </motion.div>
                     )}
 
@@ -272,7 +272,7 @@ export default function ContactPage() {
                         />
                         {submitStatus === 'error' && !recaptchaToken && (
                           <p className="text-sm text-red-600">
-                            กรุณายืนยันว่าคุณไม่ใช่หุ่นยนต์
+                            Please complete the reCAPTCHA to verify you are not a robot.
                           </p>
                         )}
                       </div>
@@ -285,7 +285,7 @@ export default function ContactPage() {
                         disabled={isSubmitting || !recaptchaToken}
                       >
                         <Send className="h-4 w-4" />
-                        {isSubmitting ? 'กำลังส่ง...' : 'Send Message'}
+                        {isSubmitting ? 'sending...' : 'Send Message'}
                       </Button>
                     </motion.div>
                   </form>
