@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { PageHeader } from "@/components/page-header";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 
@@ -122,7 +121,7 @@ export default function AboutPage() {
                   transition={{ duration: 0.7, delay: 0.5 }}
                 >
                   <p className="text-base leading-relaxed">
-                    My goal is to pursue a career as a <span className="font-semibold text-primary">Backend Developer</span> because I believe it is a crucial role in designing the system's backend. I am interested in working as part of a team and have a meticulous nature. I am also eager to learn new things. I hope you will give me the opportunity to contribute to improving the organization's system.
+                    My goal is to pursue a career as a <span className="font-semibold text-primary">Backend Developer</span> because I believe it is a crucial role in designing the system&apos;s backend. I am interested in working as part of a team and have a meticulous nature. I am also eager to learn new things. I hope you will give me the opportunity to contribute to improving the organization&apos;s system.
                   </p>
                 </motion.div>
                 
@@ -136,13 +135,13 @@ export default function AboutPage() {
                   transition={{ duration: 0.7, delay: 0.6 }}
                 >
                   <p className="text-base leading-relaxed">
-                    I am a passionate <span className="font-semibold text-primary">Computer Engineering student</span> at King Mongkut's University of Technology North Bangkok with a strong focus on backend development. My journey in technology began with curiosity about how systems work behind the scenes.
+                    I am a passionate <span className="font-semibold text-primary">Computer Engineering student</span> at King Mongkut&apos;s University of Technology North Bangkok with a strong focus on backend development. My journey in technology began with curiosity about how systems work behind the scenes.
                   </p>
                   <p className="text-base leading-relaxed">
                     Through my cooperative education at <span className="font-semibold">Biotec</span>, I gained hands-on experience in developing robust backend solutions using <span className="font-medium">Django, MongoDB, and Docker</span>. I thrive in collaborative environments and believe that great software is built by great teams.
                   </p>
                   <p className="text-base leading-relaxed">
-                    I'm particularly drawn to the challenge of creating <span className="font-medium">scalable, efficient systems</span> that can handle complex business logic while maintaining clean, maintainable code. My meticulous nature helps me write reliable software that stands the test of time.
+                    I&apos;m particularly drawn to the challenge of creating <span className="font-medium">scalable, efficient systems</span> that can handle complex business logic while maintaining clean, maintainable code. My meticulous nature helps me write reliable software that stands the test of time.
                   </p>
                 </motion.div>
               </motion.div>
@@ -223,7 +222,7 @@ export default function AboutPage() {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.9 }}
                 >
-                  <p className="text-muted-foreground mb-3">When I'm not coding, you can find me:</p>
+                  <p className="text-muted-foreground mb-3">When I&apos;m not coding, you can find me:</p>
                   <motion.div 
                     className="flex flex-wrap gap-2"
                     variants={badgeContainer}
