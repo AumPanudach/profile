@@ -6,11 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { MapPin, Mail, Phone, Github, Facebook, Send, CheckCircle, Shield } from "lucide-react";
+import { MapPin, Mail, Phone, Github, Facebook, Send, CheckCircle } from "lucide-react";
 import { motion, Variants } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import emailjs from '@emailjs/browser';
-import ReCAPTCHA from "react-google-recaptcha";
 
 export default function ContactPage() {
   // State for form handling
@@ -22,8 +21,6 @@ export default function ContactPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   // Handle form input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -37,32 +34,11 @@ export default function ContactPage() {
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Check if reCAPTCHA is completed
-    if (!recaptchaToken) {
-      setSubmitStatus('error');
-      return;
-    }
-    
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
     try {
-      // First verify reCAPTCHA on server-side
-      const recaptchaResponse = await fetch('/api/verify-recaptcha', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token: recaptchaToken }),
-      });
-
-      const recaptchaResult = await recaptchaResponse.json();
-    
-      if (!recaptchaResult.success) {
-        throw new Error('reCAPTCHA verification failed');
-      }
-
       // EmailJS configuration from environment variables
       const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
       const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
@@ -83,16 +59,13 @@ export default function ContactPage() {
           subject: formData.subject,
           message: formData.message,
           to_name: "Panudach",
-          to_email: contactEmail,
-          'g-recaptcha-response': recaptchaToken
+          to_email: contactEmail
         },
         publicKey
       );
 
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' }); // Reset form
-      setRecaptchaToken(null);
-      recaptchaRef.current?.reset(); // Reset reCAPTCHA
     } catch (error) {
       console.error('Failed to send email:', error);
       setSubmitStatus('error');
@@ -256,33 +229,11 @@ export default function ContactPage() {
                       </div>
                     </motion.div>
                     
-                    {/* reCAPTCHA */}
-                    <motion.div variants={formElementVariants}>
-                      <div className="space-y-2">
-                        <Label className="flex items-center gap-2">
-                          <Shield className="h-4 w-4 text-primary" />
-                          Security Verification
-                        </Label>
-                        <ReCAPTCHA
-                          ref={recaptchaRef}
-                          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
-                          onChange={(token) => setRecaptchaToken(token)}
-                          onExpired={() => setRecaptchaToken(null)}
-                          theme="light"
-                        />
-                        {submitStatus === 'error' && !recaptchaToken && (
-                          <p className="text-sm text-red-600">
-                            Please complete the reCAPTCHA to verify you are not a robot.
-                          </p>
-                        )}
-                      </div>
-                    </motion.div>
-
                     <motion.div variants={formElementVariants}>
                       <Button 
                         type="submit" 
                         className="w-full md:w-auto flex gap-2"
-                        disabled={isSubmitting || !recaptchaToken}
+                        disabled={isSubmitting}
                       >
                         <Send className="h-4 w-4" />
                         {isSubmitting ? 'sending...' : 'Send Message'}
