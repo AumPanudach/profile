@@ -9,7 +9,7 @@ import {
 
 
 export const metadata: Metadata = {
-  title: "John Doe | Portfolio",
+  title: "Aum Panudach | Portfolio",
   description: "Personal portfolio of John Doe, Full Stack Developer",
 };
 
